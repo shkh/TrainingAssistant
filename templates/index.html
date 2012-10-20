@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>haartraining tool</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.Jcrop.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.Jcrop.css')}}"/>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/haar.js')}}"></script>
+    
+    <script type="text/javascript">
+      document.write('<script type="text/javascript" src="static/js/haar.js?' + (new Date()).getTime() + "\"><\/script>");
+    </script>
+    
+    <script type="text/javascript">
+      var imgsrc = '{{ imgsrc }}';
+      console.log(imgsrc);
+    </script>
+
+  </head>
+  <body>
+    <div id="header">
+    <h1>HaarLike特徴量</h1>
+      <div id="buttons">
+        <input id="next" type="button" value="Skip/Submit">
+        <input id="reset" type="button" value="Reset">
+      </div>
+    </div>
+    <div id="main">
+      <div id="canvas-wrapper"></div>
+    </div>
+
+  </body>
+</html>
+
+
+
