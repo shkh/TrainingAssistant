@@ -2,10 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import settings
-import urllib, urllib2
+import requests
 import json
 import os
-import requests
 
 def getImageList( word, key, skip=0, images=[] ):
     
