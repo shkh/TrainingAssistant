@@ -11,7 +11,6 @@ body {
 }
 
 .progress {
-    width: 600px;
     height: 30px;
     margin-bottom: 0px;
     background-color: #8F8F8F;
@@ -30,6 +29,18 @@ body {
     -moz-box-shadow: 3px 3px 10px #888;
     -webkit-box-shadow: 3px 3px 10px #888;
     box-shadow: 3px 3px 10px #888;
+}
+
+.messages {
+    margin-top: 80px;
+}
+
+.message {
+    font-size: 45pt;
+    font-weight: bold;
+    line-height: 35pt;
+    font-family: AmericanTypewriter,GillSans,'Courier New', Courier;
+    color: #D66270;
 }
 
 .navbar .btn-group {
