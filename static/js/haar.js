@@ -1,4 +1,5 @@
 var coords = new Array();
+var curcrd;
 //var imgsrc = "static/img/0.jpg";
 var canvas;
 var context;
@@ -31,17 +32,32 @@ function draw(){
     $(function(){
       $('#cnvs').Jcrop({
         onSelect: selected, 
+        //onChange: changed, 
+        onRelease: released, 
       });
     });
   }
 }
 
 function selected(c){
-  coords.push([c.x, c.y, c.w, c.h]);
+  curcrd = [c.x, c.y, c.w, c.h];
+}
+
+//function changed(c){
+  //curcrd[0] += c.x;
+  //curcrd[1] += c.y;
+  //curcrd[2] += c.w;
+  //curcrd[3] += c.h;
+//}
+
+function released(c){
+  coords.push(curcrd);
+  //curcrd = []
+  //coords.push([c.x, c.y, c.w, c.h]);
   context.beginPath();
   context.lineWidth = 3;
-  context.strokeStyle = 'rgba(192, 80, 77, 0.4)';
-  context.strokeRect(c.x, c.y, c.w, c.h);
+  context.strokeStyle = '#b22222';
+  context.strokeRect(curcrd[0], curcrd[1], curcrd[2], curcrd[3]);
   console.log(coords);
 }
 
@@ -65,8 +81,8 @@ function nextajax(){
       $('.bar').css({'width': count*100/imgnum + '%'});
 
       if (flag==false){
-        $('#canvas-wrapper').empty().append('<h2>お疲れ様でした。</h2>');
-        $('#buttons').empty();
+        $('#canvas-wrapper').empty().append('<div class="messages"><div class="message">' + imgnum + ' Images were</div><div class="message">Successfuly Processed!</div><div class="message">Bye!</div></div>');
+        $('.btn').addClass('disabled');
       } else{
         resetstatus();
       }
