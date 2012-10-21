@@ -2,11 +2,17 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>haartraining tool</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.Jcrop.js') }}"></script>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.Jcrop.css')}}"/>
+    <title>TrainingAssistant</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='Jcrop/js/jquery.Jcrop.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Jcrop/css/jquery.Jcrop.css')}}"/>
+    
     <script type="text/javascript" src="{{ url_for('static', filename='js/haar.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css')}}"/>
     
     <script type="text/javascript">
       document.write('<script type="text/javascript" src="static/js/haar.js?' + (new Date()).getTime() + "\"><\/script>");
@@ -14,24 +20,39 @@
     
     <script type="text/javascript">
       var imgsrc = '{{ imgsrc }}';
+      var imgnum = '{{ imgnum }}';
       console.log(imgsrc);
     </script>
 
   </head>
   <body>
-    <div id="header">
-    <h1>HaarLike特徴量</h1>
-      <div id="buttons">
-        <input id="next" type="button" value="Skip/Submit">
-        <input id="reset" type="button" value="Reset">
+
+    <div class="navbar navbar-fixed-top navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+          <div align="center" class="head-wrapper">
+            <div class="progress progress-danger active">
+              <div class="bar"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div id="main">
+
+    <div class="container main-wrapper">
       <div id="canvas-wrapper"></div>
+    </div>
+
+    <div class="navbar navbar-fixed-bottom navbar-inverse">
+      <div class="navbar-inner">
+        <div align="center" class="container">
+          <div class="btn-group">
+            <button class="btn btn-info btn-large" id="reset">RESET</button>
+            <button class="btn btn-success btn-large" id="next">NEXT</button>
+          </div>
+        </div>
+      </div>
     </div>
 
   </body>
 </html>
-
-
-

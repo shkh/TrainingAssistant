@@ -17,13 +17,16 @@ function draw(){
   var image = new Image();
   image.src = imgsrc;
   image.onload = function(){
+    var wid = image.naturalWidth;
+    var hei = image.naturalHeight;
+    $('.main-wrapper').css({'width': wid, 'minWidth': wid});
     var wrapper = $('#canvas-wrapper');
     $(wrapper).empty();
     var c = $('<canvas/>').attr('id', 'cnvs');
     $(wrapper).append(c);
     canvas = $('#cnvs').get(0);
     context = canvas.getContext('2d');
-    $('#cnvs').css({'width': image.naturalWidth + 'px', 'height': image.naturalHeight + 'px'}).attr({'width': image.naturalWidth + 'px', 'height': image.naturalHeight + 'px'});
+    $('#cnvs').css({'width': wid + 'px', 'height': hei + 'px'}).attr({'width': wid + 'px', 'height': hei + 'px'});
     context.drawImage(image, 0, 0);
     $(function(){
       $('#cnvs').Jcrop({
@@ -56,7 +59,11 @@ function nextajax(){
     url: "/_next",
     success: function (data) {
       imgsrc = data.imgsrc;
-      flag = data.flag;
+      var count = data.count;
+      var flag = data.flag;
+      console.log(count*100/imgnum);
+      $('.bar').css({'width': count*100/imgnum + '%'});
+
       if (flag==false){
         $('#canvas-wrapper').empty().append('<h2>お疲れ様でした。</h2>');
         $('#buttons').empty();
