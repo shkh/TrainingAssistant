@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from flask import *
-import os, json, re
+import os
+import json
+import re
+import sys
 
 app = Flask(__name__)
 app.secret_key = '佐久間さん可愛い'
@@ -8,7 +11,10 @@ app.secret_key = '佐久間さん可愛い'
 #画像の準備
 image_ptrn = re.compile('.*[.](jpg|jpeg|png|bmp|gif)$')
 image_dir = os.path.join( 'static', 'img' )
-images = [ image for image in os.listdir( image_dir ) if re.match(image_ptrn, image) ]
+images = [ image for image in os.listdir( image_dir ) if re.match( image_ptrn, image ) ]
+if not len( images ):
+    sys.exit( 'Error: Could not find images')
+
 
 #正例と負例用のファイル
 positive = open('info.dat', 'a')
@@ -21,7 +27,7 @@ def index():
     imgsrc = os.path.join( image_dir , images[0] )
     session['pos'] = 0
 
-    return render_template( 'index.html', imgsrc=imgsrc ) 
+    return render_template( 'index.html', imgsrc=imgsrc, imgnum=len(images) ) 
 
 @app.route('/_next')
 def _next():
@@ -54,7 +60,7 @@ def _next():
         session['pos'] = tar
         imgsrc = os.path.join( image_dir, images[tar] )
 
-    return jsonify( imgsrc=imgsrc, flag=flag ) 
+    return jsonify( imgsrc=imgsrc, flag=flag, count=tar ) 
 
 
 if __name__ == '__main__':
