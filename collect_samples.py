@@ -6,9 +6,9 @@ import requests
 import json
 import os
 
-def getImageList( word, key, skip=0, images=[] ):
+def getUrls( word, key, skip=0, urls=[] ):
     
-    print "画像数:", len(images)
+    print "画像数:", len(urls)
     prefix = 'https://api.datamarket.azure.com/Data.ashx/Bing/Search/v1/Image'
     params = {
             'Query': "'%s'" % word , 
@@ -25,19 +25,19 @@ def getImageList( word, key, skip=0, images=[] ):
     for result in results['d']['results']:
         typ = result[ 'ContentType' ]
         if typ== 'image/jpg' or typ == 'image/jpeg':
-            images.append( result['MediaUrl'] )
+            urls.append( result['MediaUrl'] )
 
     if results['d'].has_key( '__next' ):
-        return getImageList( word, key, skip=skip+50, images=images)
+        return getUrls( word, key, skip=skip+50, urls=urls)
     else:
-        return images
+        return urls
 
 def saveImages( urls, dir ):
     for url in urls:
         try:
-            img = requests.get( url )
+            img = requests.get( url ).content
             f = open( os.path.join( dir, os.path.basename( url ) ), 'wb' )
-            f.write( img.read() )
+            f.write( img )
             img.close()
             f.close()
         except:
@@ -48,5 +48,6 @@ if __name__ == '__main__':
     key = settings.key
     dir = os.path.join( 'static', 'img' )
 
-    urls = getJson( word, key )
-    downloadImages( urls, dir )
+    urls = getUrls( word, key )
+    saveImages( urls, dir )
+
