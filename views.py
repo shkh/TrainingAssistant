@@ -17,12 +17,14 @@ images = [ image for image in os.listdir( image_dir ) if re.match( image_ptrn, i
 if not len( images ):
     sys.exit( 'Error: Could not find images')
 
-#正例と負例用のファイル
-positive = open('info.dat', 'a')
-negative = open('bg.txt', 'a')
-
 @app.route('/')
 def index():
+
+    #正例と負例用のファイル
+    global positive
+    global negative
+    positive = open('info.dat', 'a')
+    negative = open('bg.txt', 'a')
 
     #最初の画像
     imgsrc = os.path.join( image_dir , images[0] )
