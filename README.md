@@ -17,7 +17,7 @@
 		% pip install flask requests
 
 
-# Usage
+# How To Use 
 ---
 ### You can use `TrainingAssistant/collect_samples.py` to collect samples
 
