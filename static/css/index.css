@@ -43,6 +43,16 @@ body {
     color: #D66270;
 }
 
+.count {
+    font-family: AmericanTypewriter,'Courier New', Courier;
+    min-width: 235px;
+    text-align: right;
+    font-size: 25pt;
+    line-height: 50px;
+    float: right;
+    margin-left: 15px;
+}
+
 .navbar .btn-group {
     margin: 10px auto 10px auto;
 }
