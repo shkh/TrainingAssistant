@@ -28,9 +28,11 @@ def index():
 
     #最初の画像
     imgsrc = os.path.join( image_dir , images[0] )
+    imgnum = len(images)
+    count = ''.join( [ '1'.zfill( len(str(imgnum)) ), ' of ', str(imgnum) ] )
     session['pos'] = 0
 
-    return render_template( 'index.html', imgsrc=imgsrc, imgnum=len(images) ) 
+    return render_template( 'index.html', imgsrc=imgsrc, imgnum=imgnum, count=count ) 
 
 @app.route('/_next')
 def _next():
