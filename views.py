@@ -36,23 +36,28 @@ def index():
 
 @app.route('/_next')
 def _next():
-    
-    #囲まれた範囲の座標
-    coords = request.args.get('coords')
-    coords = json.loads(coords)
 
-    #処理中の画像のパス
-    image_path = os.path.join( image_dir, images[ session['pos'] ] )
-
-    #正例か負例か
-    if len(coords) == 0:
-        negative.write( ''.join( [ image_path, '\n' ] ) )
-    else:
-        s = ''
-        for coord in coords:
-            s = '  '.join( [ s, ' '.join( [ str(int(e)) for e in coord ] ) ] )
-        positive.write('%s  %d%s\n' % (image_path, len(coords), s))
+    skip = request.args.get('skip') 
+    print skip, " type:", type(skip)
     
+    if skip == u'0':
+        print "going to proccess" 
+        #囲まれた範囲の座標
+        coords = request.args.get('coords')
+        coords = json.loads(coords)
+
+        #処理中の画像のパス
+        image_path = os.path.join( image_dir, images[ session['pos'] ] )
+
+        #正例か負例か
+        if len(coords) == 0:
+            negative.write( ''.join( [ image_path, '\n' ] ) )
+        else:
+            s = ''
+            for coord in coords:
+                s = '  '.join( [ s, ' '.join( [ str(int(e)) for e in coord ] ) ] )
+            positive.write('%s  %d%s\n' % (image_path, len(coords), s))
+        
     #まだ画像があるか
     tar = session['pos'] + 1;
     if tar >= len(images):

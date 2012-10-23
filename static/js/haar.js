@@ -8,8 +8,11 @@ onload = function(){
   $('#reset').click(function(){
     resetstatus();
   });
+  $('#skip').click(function(){
+    nextajax(skip=1);
+  })
   $('#next').live('click', function(){
-    nextajax();
+    nextajax(skip=0);
   });
 };
 
@@ -56,12 +59,12 @@ function resetstatus(){
   draw();
 }
 
-function nextajax(){
+function nextajax(skip){
   coords = JSON.stringify(coords);
   $.ajax({
     type: 'GET', 
     dataType: "json",
-    data: {'coords': coords}, 
+    data: {'coords': coords, 'skip': skip}, 
     url: "/_next",
     success: function (data) {
       imgsrc = data.imgsrc;
