@@ -51,7 +51,7 @@ function released(c){
   context.lineWidth = 3;
   context.strokeStyle = '#b22222';
   context.strokeRect(curcrd[0], curcrd[1], curcrd[2], curcrd[3]);
-  console.log(coords);
+  //console.log(coords);
 }
 
 function resetstatus(){
@@ -60,6 +60,7 @@ function resetstatus(){
 }
 
 function nextajax(skip){
+  console.log('座標:'+coords);
   coords = JSON.stringify(coords);
   $.ajax({
     type: 'GET', 
@@ -70,7 +71,7 @@ function nextajax(skip){
       imgsrc = data.imgsrc;
       var count = data.count;
       var flag = data.flag;
-      console.log(count*100/imgnum);
+      //console.log(count*100/imgnum);
       $('.bar').css({'width': count*100/imgnum + '%'});
 
       if (flag==false){

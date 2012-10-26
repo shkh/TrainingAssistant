@@ -17,6 +17,8 @@ images = [ image for image in os.listdir( image_dir ) if re.match( image_ptrn, i
 if not len( images ):
     sys.exit( 'Error: Could not find images')
 
+logf = open('log.dat', 'w')
+
 @app.route('/')
 def index():
 
@@ -38,10 +40,10 @@ def index():
 def _next():
 
     skip = request.args.get('skip') 
-    print skip, " type:", type(skip)
+    #print skip, " type:", type(skip)
     
     if skip == u'0':
-        print "going to proccess" 
+        #print "going to proccess" 
         #囲まれた範囲の座標
         coords = request.args.get('coords')
         coords = json.loads(coords)
@@ -52,10 +54,14 @@ def _next():
         #正例か負例か
         if len(coords) == 0:
             negative.write( ''.join( [ image_path, '\n' ] ) )
+            logf.write( ''.join( [ image_path, '\n' ] ) )
+
         else:
             s = ''
             for coord in coords:
                 s = '  '.join( [ s, ' '.join( [ str(int(e)) for e in coord ] ) ] )
+            
+            logf.write( "%s %d%s\n" % (image_path, len(coords), s) )
             positive.write('%s  %d%s\n' % (image_path, len(coords), s))
         
     #まだ画像があるか
@@ -63,6 +69,7 @@ def _next():
     if tar >= len(images):
         imgsrc = ""
         flag = False
+        logf.close()
         negative.close()
         positive.close()
     else:
