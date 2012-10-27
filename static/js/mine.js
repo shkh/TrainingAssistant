@@ -71,8 +71,8 @@ function nextajax(skip){
       imgsrc = data.imgsrc;
       var count = data.count;
       var flag = data.flag;
-      //console.log(count*100/imgnum);
       $('.bar').css({'width': count*100/imgnum + '%'});
+      console.log(count + ' ' + imgnum);
 
       if (flag==false){
         w = $('.head-wrapper').width()
