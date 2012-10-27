@@ -39,11 +39,11 @@ def index():
 @app.route('/_next')
 def _next():
 
+    #その画像をスキップするか
     skip = request.args.get('skip') 
-    #print skip, " type:", type(skip)
     
     if skip == u'0':
-        #print "going to proccess" 
+
         #囲まれた範囲の座標
         coords = request.args.get('coords')
         coords = json.loads(coords)
@@ -63,9 +63,10 @@ def _next():
             
             logf.write( "%s %d%s\n" % (image_path, len(coords), s) )
             positive.write('%s  %d%s\n' % (image_path, len(coords), s))
+    
+    tar = session['pos'] + 1;
         
     #まだ画像があるか
-    tar = session['pos'] + 1;
     if tar >= len(images):
         imgsrc = ""
         flag = False
