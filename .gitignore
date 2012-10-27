@@ -1,3 +1,5 @@
 settings.py
 bg.txt
 info.dat
+log.dat
+static/img/*
