@@ -1,8 +1,8 @@
-# Installation
----
+## Set up
+
 1. Clone to your computer: 
 
-		% git clone git@github.com:<<github account>>/TrainingAssistant.git
+		% git clone git@github.com:shkh/TrainingAssistant.git
 
 2. Add Jcrop: 
 
@@ -12,37 +12,18 @@
 		% cd static/Jcrop
 		% git checkout master
 
-3. install python modules
+3. Install python modules
 		
 		% pip install flask requests
 
+4. Add images into `static/img`
 
-# How To Use 
----
-### You can use `TrainingAssistant/collect_samples.py` to collect samples
+## Run server
 
-1. Get an account key of Azure API
-	
-	[https://datamarket.azure.com/dataset/5ba839f1-12ce-4cce-bf57-a49d98d29a44](https://datamarket.azure.com/dataset/5ba839f1-12ce-4cce-bf57-a49d98d29a44)
-	
-2. Set your key and search word to `TrainingAssistant/settings.py`
-		
-		# -*- coding: utf-8 -*-
-		word = u'search word'
-		key	= 'your key'
-	
-3. Run
-	
-		% python collect_samples.py
+    % python views.py
 
-	Samples will be stored into `TrainingAssistant/static/img`
-	
-### Run server
+This command starts the Flask server on port 5000, visit `http://localhost:5000`.
 
-	% python views.py
+![リス可愛い](http://farm9.staticflickr.com/8334/8131692997_6cd40c380a_z.jpg)
 
-then visit `http://localhost:5000`
-
-![見たな？](http://farm9.staticflickr.com/8328/8108235073_6905ebdf39_c.jpg)
-	
-After all samples will be processed, 
+After all images will be processed, you will get `info.dat` and `bg.txt`; Respectively the list of `positive` samples and the list of `negative` samples.
