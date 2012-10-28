@@ -26,9 +26,9 @@ body {
 }
 
 #cnvs {
-    -moz-box-shadow: 3px 3px 10px #888;
-    -webkit-box-shadow: 3px 3px 10px #888;
-    box-shadow: 3px 3px 10px #888;
+    -webkit-box-shadow: 0px 0px 25px rgba(50, 50, 50, 1);
+    -moz-box-shadow:    0px 0px 25px rgba(50, 50, 50, 1);
+    box-shadow:         0px 0px 25px rgba(50, 50, 50, 1);
 }
 
 .messages {
@@ -39,18 +39,24 @@ body {
     font-size: 45pt;
     font-weight: bold;
     line-height: 35pt;
-    font-family: AmericanTypewriter,GillSans,'Courier New', Courier;
+    font-family: 'GentiumBasicRegular', Tahoma, Geneva, sans-serif;
     color: #D66270;
 }
 
 .count {
-    font-family: AmericanTypewriter,'Courier New', Courier;
-    min-width: 235px;
+    min-width: 200px;
     text-align: right;
-    font-size: 25pt;
-    line-height: 50px;
+    font-size: 17pt;
+    line-height: 34px;
     float: right;
-    margin-left: 15px;
+    color: #E0E0E0;
+    font-family: 'GentiumBasicRegular', Tahoma, Geneva, sans-serif;
+    padding-right: 10px;
+    margin: 8px 0px 8px 10px;
+    background-color: #5C5C5C;
+    -webkit-box-shadow: inset 1px 1px 3px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 1px 1px 3px 3px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
 }
 
 .navbar .btn-group {

@@ -49,7 +49,7 @@ function released(c){
   coords.push(curcrd);
   context.beginPath();
   context.lineWidth = 3;
-  context.strokeStyle = '#b22222';
+  context.strokeStyle = 'rgba(238, 26, 26, 1)';
   context.strokeRect(curcrd[0], curcrd[1], curcrd[2], curcrd[3]);
   //console.log(coords);
 }
