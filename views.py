@@ -19,25 +19,32 @@ if not len( images ):
 
 logf = open('log.dat', 'w')
 
+pos = 0
+
 @app.route('/')
 def index():
+    
+    global pos
 
     #正例と負例用のファイル
     global positive
     global negative
+    
     positive = open('info.dat', 'a')
     negative = open('bg.txt', 'a')
 
     #最初の画像
-    imgsrc = os.path.join( image_dir , images[0] )
+    imgsrc = os.path.join( image_dir, images[pos] )
     imgnum = len(images)
-    count = ''.join( [ '1'.zfill( len(str(imgnum)) ), ' of ', str(imgnum) ] )
-    session['pos'] = 0
-
-    return render_template( 'index.html', imgsrc=imgsrc, imgnum=imgnum, count=count ) 
+    count = pos
+    counter = ''.join( [ str(pos+1).zfill( len(str(imgnum)) ), ' of ', str(imgnum) ] )
+    
+    return render_template( 'index.html', imgsrc=imgsrc, imgnum=imgnum, count=count, counter=counter ) 
 
 @app.route('/_next')
 def _next():
+
+    global pos
 
     #その画像をスキップするか
     skip = request.args.get('skip') 
@@ -49,25 +56,25 @@ def _next():
         coords = json.loads(coords)
 
         #処理中の画像のパス
-        image_path = os.path.join( image_dir, images[ session['pos'] ] )
+        image_path = os.path.join( image_dir, images[pos] )
 
         #正例か負例か
         if len(coords) == 0:
             negative.write( ''.join( [ image_path, '\n' ] ) )
             logf.write( ''.join( [ image_path, '\n' ] ) )
+            logf.flush()
 
         else:
             s = ''
             for coord in coords:
                 s = '  '.join( [ s, ' '.join( [ str(int(e)) for e in coord ] ) ] )
             
-            logf.write( "%s %d%s\n" % (image_path, len(coords), s) )
             positive.write('%s  %d%s\n' % (image_path, len(coords), s))
+            logf.write( "%s %d%s\n" % (image_path, len(coords), s) )
+            logf.flush()
     
-    tar = session['pos'] + 1;
-        
     #まだ画像があるか
-    if tar >= len(images):
+    if pos+1 >= len(images):
         imgsrc = ""
         flag = False
         logf.close()
@@ -75,10 +82,10 @@ def _next():
         positive.close()
     else:
         flag = True
-        session['pos'] = tar
-        imgsrc = os.path.join( image_dir, images[tar] )
+        imgsrc = os.path.join( image_dir, images[pos+1] )
+        pos = pos + 1
 
-    return jsonify( imgsrc=imgsrc, flag=flag, count=tar ) 
+    return jsonify( imgsrc=imgsrc, flag=flag, count=pos ) 
 
 if __name__ == '__main__':
     app.debug = True

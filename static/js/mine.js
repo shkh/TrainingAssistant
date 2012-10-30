@@ -14,6 +14,7 @@ onload = function(){
   $('#next').live('click', function(){
     nextajax(skip=0);
   });
+  $('.bar').css({'width': count*100/imgnum + '%'});
 };
 
 function draw(){
@@ -34,7 +35,6 @@ function draw(){
     $(function(){
       $('#cnvs').Jcrop({
         onSelect: selected, 
-        //onChange: changed, 
         onRelease: released, 
       });
     });
@@ -51,7 +51,6 @@ function released(c){
   context.lineWidth = 3;
   context.strokeStyle = 'rgba(238, 26, 26, 1)';
   context.strokeRect(curcrd[0], curcrd[1], curcrd[2], curcrd[3]);
-  //console.log(coords);
 }
 
 function resetstatus(){
