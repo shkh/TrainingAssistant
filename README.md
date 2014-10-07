@@ -14,7 +14,7 @@
 
 3. Install python modules
 		
-		% pip install flask requests
+		% pip install -f freezed.txt
 
 4. Add images into `static/img`
 
