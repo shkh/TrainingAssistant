@@ -76,16 +76,17 @@ def _next():
     #まだ画像があるか
     if pos+1 >= len(images):
         imgsrc = ""
-        flag = False
+        finished = True
+        pos = pos + 1
         logf.close()
         negative.close()
         positive.close()
     else:
-        flag = True
+        finished = False
         imgsrc = os.path.join( image_dir, images[pos+1] )
         pos = pos + 1
 
-    return jsonify( imgsrc=imgsrc, flag=flag, count=pos ) 
+    return jsonify( imgsrc=imgsrc, finished=finished, count=pos ) 
 
 if __name__ == '__main__':
     app.debug = True
