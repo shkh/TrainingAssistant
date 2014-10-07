@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+u"""
+Collects samples from bing
+"""
 import settings
 import requests
 import json
