@@ -14,7 +14,7 @@
 
 3. Install python modules
 		
-		% pip install -f freezed.txt
+		% pip install -r freezed.txt
 
 4. Add images into `static/img`
 
